@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=2.7.4
+ARG RUBY_VERSION=2.7.8
 FROM ruby:$RUBY_VERSION-slim
 
 RUN apt-get update \
