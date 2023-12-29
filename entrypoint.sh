@@ -14,6 +14,7 @@ GITHUB_PAGES_BIN=jekyll
 
 # Check if Gemfile's dependencies are satisfied or print a warning
 if test -e "$SOURCE_DIRECTORY/Gemfile" && ! bundle check --dry-run --gemfile "$SOURCE_DIRECTORY/Gemfile"; then
+  gem uninstall minima --version '2.5.1'
   bundle install --gemfile="$SOURCE_DIRECTORY/Gemfile"
   echo "::warning:: github-pages can't satisfy your Gemfile's dependencies."
 fi
