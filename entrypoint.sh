@@ -13,6 +13,7 @@ GITHUB_PAGES_BIN=$PAGES_GEM_HOME/bin/github-pages
 
 # Check if Gemfile's dependencies are satisfied or print a warning
 if test -e "$SOURCE_DIRECTORY/Gemfile" && ! bundle check --dry-run --gemfile "$SOURCE_DIRECTORY/Gemfile"; then
+  bundle install --gemfile="$SOURCE_DIRECTORY/Gemfile"
   echo "::warning:: github-pages can't satisfy your Gemfile's dependencies."
 fi
 
@@ -39,7 +40,6 @@ fi
 
 { cd "$PAGES_GEM_HOME" || { echo "::error::pages gem not found"; exit 1; }; }
 
-bundle install
 # Run the command, capturing the output
 build_output="$($GITHUB_PAGES_BIN build "$VERBOSE" "$FUTURE" --source "$SOURCE_DIRECTORY" --destination "$DESTINATION_DIRECTORY")"
 
