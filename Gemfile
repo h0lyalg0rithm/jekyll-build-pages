@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 # Manage our dependency on the version of the github-pages gem here.
-gem "github-pages", "= 228"
+gem "github-pages", github: 'h0lyalg0rithm/pages-gem', ref: 'master'
 
 # Explicitly include this gem here.
 # It is not directly included in the github-pages gem list of dependencies,
