@@ -46,7 +46,7 @@ cd "$SOURCE_DIRECTORY"
 bundle install -j8
 
 # Run the command, capturing the output
-build_output="$($GITHUB_PAGES_BIN build "$VERBOSE" "$FUTURE" --source "$SOURCE_DIRECTORY" --destination "$DESTINATION_DIRECTORY")"
+build_output="$($GITHUB_PAGES_BIN build --trace "$VERBOSE" "$FUTURE" --source "$SOURCE_DIRECTORY" --destination "$DESTINATION_DIRECTORY")"
 
 # Capture the exit code
 exit_code=$?
