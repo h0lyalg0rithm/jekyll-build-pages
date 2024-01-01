@@ -22,7 +22,7 @@ DISABLE_WHITELIST=true
 
 # Set environment variables required by supported plugins
 export JEKYLL_ENV="production"
-export JEKYLL_GITHUB_TOKEN=$INPUT_TOKEN
+#export JEKYLL_GITHUB_TOKEN=$INPUT_TOKEN
 export PAGES_REPO_NWO=$GITHUB_REPOSITORY
 export JEKYLL_BUILD_REVISION=$INPUT_BUILD_REVISION
 export PAGES_API_URL=$GITHUB_API_URL
