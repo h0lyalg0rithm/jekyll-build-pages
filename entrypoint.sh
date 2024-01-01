@@ -10,19 +10,11 @@ SOURCE_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_SOURCE
 DESTINATION_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_DESTINATION
 PAGES_GEM_HOME=$BUNDLE_APP_CONFIG
 GITHUB_PAGES_BIN=$PAGES_GEM_HOME/bin/github-pages
-GITHUB_PAGES_BIN="bundle exec jekyll"
+JEKYLL_BIN="bundle exec jekyll"
 DISABLE_WHITELIST=true
-
-# Check if Gemfile's dependencies are satisfied or print a warning
-#if test -e "$SOURCE_DIRECTORY/Gemfile" && ! bundle check --dry-run --gemfile "$SOURCE_DIRECTORY/Gemfile"; then
-#  gem uninstall minima --version '2.5.1'
-#  bundle install --gemfile="$SOURCE_DIRECTORY/Gemfile"
-#  echo "::warning:: github-pages can't satisfy your Gemfile's dependencies."
-#fi
 
 # Set environment variables required by supported plugins
 export JEKYLL_ENV="production"
-#export JEKYLL_GITHUB_TOKEN=$INPUT_TOKEN
 export PAGES_REPO_NWO=$GITHUB_REPOSITORY
 export JEKYLL_BUILD_REVISION=$INPUT_BUILD_REVISION
 export PAGES_API_URL=$GITHUB_API_URL
@@ -41,12 +33,14 @@ else
   FUTURE=''
 fi
 
-#{ cd "$PAGES_GEM_HOME" || { echo "::error::pages gem not found"; exit 1; }; }
-cd "$SOURCE_DIRECTORY"
+# Enter source code directory
+{ cd "$SOURCE_DIRECTORY" || { echo "::error::pages gem not found"; exit 1; }; }
+
+# Install required gems
 bundle install -j8
 
 # Run the command, capturing the output
-build_output="$($GITHUB_PAGES_BIN build --trace "$VERBOSE" "$FUTURE" --source "$SOURCE_DIRECTORY" --destination "$DESTINATION_DIRECTORY")"
+build_output="$($JEKYLL_BIN build --trace "$VERBOSE" "$FUTURE" --source "$SOURCE_DIRECTORY" --destination "$DESTINATION_DIRECTORY")"
 
 # Capture the exit code
 exit_code=$?
