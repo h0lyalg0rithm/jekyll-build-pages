@@ -11,6 +11,7 @@ RUN apt-get update \
 COPY Gemfile Gemfile
 
 RUN gem install bundler:2.4.10
+RUN export DISABLE_WHITELIST=true
 RUN NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install
 
 RUN \
